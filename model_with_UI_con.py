@@ -42,7 +42,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
-memory = AssistantMemory()  # Ініціалізуємо пам'ять асистента
+memory = AssistantMemory()  
 #change if plan is over
 from elevenlabsspeach import speak
 #from elevenlabsspeach import speak
@@ -89,7 +89,6 @@ trigger_phrases = [
 
 
 def extract_voice_command(folder_path="Jarvis_voice_commands/standart_responses"):
-# Отримаємо список всіх mp3-файлів у папці
     audio_files = [
         os.path.join(folder_path, file)
         for file in os.listdir(folder_path)
@@ -116,9 +115,9 @@ def summarize_text(text,ui_window):
 
 def resource_path(relative_path):
     try:
-        base_path = sys._MEIPASS  # коли запаковано в .exe
+        base_path = sys._MEIPASS 
     except AttributeError:
-        base_path = os.path.abspath(".")  # коли просто скрипт
+        base_path = os.path.abspath(".")
     return os.path.join(base_path, relative_path)
 
 def save_to_pdf(text,ui_window):
@@ -185,12 +184,12 @@ def save_musics_json(ui_window):
 
 def command_req(ui_window):
     recognizer = sr.Recognizer()
-    recognizer.energy_threshold = 300  # Чутливість до гучності
-    recognizer.dynamic_energy_threshold = True  # Автоматичне налаштування під шум
-    recognizer.pause_threshold = 0.8  # Коротка пауза — кінець фрази
-    recognizer.non_speaking_duration = 0.5  # Тиша до/після фрази
-    recognizer.phrase_threshold = 0.3  # Мінімум для виявлення мовлення
-    recognizer.operation_timeout = 10  # Максимальний час очікування запису
+    recognizer.energy_threshold = 300  
+    recognizer.dynamic_energy_threshold = True  
+    recognizer.pause_threshold = 0.8  
+    recognizer.non_speaking_duration = 0.5  
+    recognizer.phrase_threshold = 0.3  
+    recognizer.operation_timeout = 10  
 
     with sr.Microphone() as source:
         print("Listening for command...")
@@ -213,12 +212,12 @@ def command_req(ui_window):
 
 def wait_for_command(ui_window):
     recognizer = sr.Recognizer()
-    recognizer.energy_threshold = 300  # Чутливість до гучності
-    recognizer.dynamic_energy_threshold = True  # Автоматичне налаштування під шум
-    recognizer.pause_threshold = 0.8  # Коротка пауза — кінець фрази
-    recognizer.non_speaking_duration = 0.5  # Тиша до/після фрази
-    recognizer.phrase_threshold = 0.3  # Мінімум для виявлення мовлення
-    recognizer.operation_timeout = 10  # Максимальний час очікування запису
+    recognizer.energy_threshold = 300  
+    recognizer.dynamic_energy_threshold = True 
+    recognizer.pause_threshold = 0.8  
+    recognizer.non_speaking_duration = 0.5  
+    recognizer.phrase_threshold = 0.3  
+    recognizer.operation_timeout = 10  
     with sr.Microphone() as source:
         print("🎧 Waiting for wake word...")
         ui_window.text_signal.emit("🎧 Waiting for wake word...")
@@ -685,7 +684,6 @@ def set_timer(amount,ui_window):
     time.sleep(amount)
     print("⏰ Час вийшов!")
 
-    # Звук (тільки для Windows)
     try:
         winsound.Beep(1000,1000)
         ui_window.text_signal.emit('Beep!!, Beep!!, it seems like timer is out')
@@ -838,26 +836,18 @@ def parse_meeting(command: str):
     if not match:
         return None  # патерн не підійшов
 
-    # -------- Групи --------
-    # 4 — години
-    # 6 — хвилини (вкладена група в 5)
-    # 7 — am/pm
-    # 8 — дата (today/tomorrow)
-    # 10 — тема
 
     hour = int(match.group(4))
     minute = int(match.group(6)) if match.group(6) else 0
     meridiem = match.group(7)
     date_word = match.group(8)
     topic = match.group(10).strip() if match.group(10) else "no topic"
-
-    # AM/PM обробка
     if meridiem and 'p' in meridiem and hour < 12:
         hour += 12
     elif meridiem and 'a' in meridiem and hour == 12:
         hour = 0
 
-    # Дата
+
     today = datetime.datetime.now()
     if date_word in ['tomorrow', 'завтра']:
         date = today + timedelta(days=1)
@@ -918,7 +908,6 @@ def reminder_loop(ui_window):
             meeting_id = reminder["id"]
             last_time = already_reminded.get(meeting_id)
 
-            # Якщо ще не нагадували або минуло більше 10 хв з останнього нагадування
             if last_time is None or (now - last_time) > REMINDER_INTERVAL:
                 ui_window.text_signal.emit(f"Boss, you have a meeting at {reminder['time_str']}: {reminder['topic']}")
                 speak(f"Boss, you have a meeting at {reminder['time_str']}: {reminder['topic']}",ui_window)
@@ -930,8 +919,8 @@ def reminder_loop(ui_window):
 
 def search_wikipedia(query):
     try:
-        wikipedia.set_lang("en")  # або "en" для англійської
-        summary = wikipedia.summary(query, sentences=2)  # 2 речення
+        wikipedia.set_lang("en")  
+        summary = wikipedia.summary(query, sentences=2)
         return summary
     except wikipedia.exceptions.DisambiguationError as e:
         return f"Занадто багато значень: {e.options[:3]}"
@@ -965,13 +954,13 @@ def launch_game(game_name):
     matched_games = [g for g in steam_games if game_name.lower() in g.lower()]
 
     if not matched_games:
-        print(f"Гру '{game_name}' не знайдено серед встановлених.")
+        print(f"GAME '{game_name}' not installed in your PC .")
         return
 
     game_folder = matched_games[0]
     game_path = os.path.join(r"C:\Program Files (x86)\Steam\steamapps\common", game_folder)
 
-    # Шукаємо .exe файл у папці гри (простий варіант)
+
     for root, dirs, files in os.walk(game_path):
         for file in files:
             if file.endswith(".exe") and game_folder.lower() in file.lower():
@@ -979,8 +968,6 @@ def launch_game(game_name):
                 print(f"Запуск: {full_path}")
                 subprocess.Popen(full_path)
                 return
-
-    print(f"Не знайдено .exe файл для гри '{game_folder}'")
 
 def extract_game_name(command):
     match = re.search(r"(play|грати)\s+(.*)", command)
@@ -1283,3 +1270,4 @@ async def run_voice_assistant(ui_window):
 
 if __name__ == "__main__":
     asyncio.run(run_voice_assistant())
+
