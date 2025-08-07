@@ -11,9 +11,9 @@ import urllib.parse
 
 def resource_path(relative_path):
     try:
-        base_path = sys._MEIPASS  # коли запаковано в .exe
+        base_path = sys._MEIPASS 
     except AttributeError:
-        base_path = os.path.abspath(".")  # коли просто скрипт
+        base_path = os.path.abspath(".")  
     return os.path.join(base_path, relative_path)
 
 class Jarvis_UI(QWidget):
@@ -29,7 +29,7 @@ class Jarvis_UI(QWidget):
         self.init_file_input()
 
         self._printed_text = "" 
-        self.recent_lines = []       # останні 5 рядків для відображення
+        self.recent_lines = []       
         self.printed_lines = []
         
     def init_window(self):
@@ -45,7 +45,7 @@ class Jarvis_UI(QWidget):
                             Qt.WindowCloseButtonHint)
 
     def init_UI(self):
-        # 1. GIF у вигляді статичного кадру
+        
         self.gif_label = QLabel(self)
         self.gif_label.setGeometry(0, 0, 400, 400)
         self.movie = QMovie("frontend/V2 Jarvis.gif")
@@ -55,7 +55,7 @@ class Jarvis_UI(QWidget):
         self.gif_label.show()
         self.gif_label.raise_()
         self.movie.start()
-        # 2. Окремий прозорий контейнер поверх для кнопки
+        
         self.overlay = QWidget(self)
         self.overlay.setGeometry(0, 0, self.width(), self.height())
         self.overlay.setAttribute(Qt.WA_TranslucentBackground)
@@ -124,13 +124,12 @@ class Jarvis_UI(QWidget):
 
         self.cleanup_timer = QTimer()
         self.cleanup_timer.timeout.connect(self.cleanup_old_lines)
-        self.cleanup_timer.start(5000)  # кожні 5 секунд
+        self.cleanup_timer.start(5000) # every 5 seconds you can change
 
 
     def type_text_effect(self, text):
         self.recent_lines.append(text)
 
-        # Підготувати до друку лише новий рядок
         self._full_text = text
         self._typed_text = ""
         self._type_index = 0
@@ -145,7 +144,7 @@ class Jarvis_UI(QWidget):
             self.text_label.setText(combined_text)
             self._type_index += 1
         else:
-            self.printed_lines.append(self._full_text)  # Додаємо завершений рядок
+            self.printed_lines.append(self._full_text) 
             self._timer.stop()
 
 
@@ -181,8 +180,8 @@ class Jarvis_UI(QWidget):
                 border-radius: 6px;
             }
         """)
-        self.send_button.setHidden(True)  # приховуємо кнопку до активації
-        self.input_field.setHidden(True)  # поле вводу вимкнено до активації
+        self.send_button.setHidden(True)  
+        self.input_field.setHidden(True)  
         self.send_button.clicked.connect(self.handle_input)
         self.input_field.returnPressed.connect(self.send_button.click)
         self.input_field.setEnabled(False)
@@ -216,28 +215,25 @@ class Jarvis_UI(QWidget):
             file_type = self.collected_data["type"]
             filename = user_text
 
-            # Додати правильне розширення, якщо його нема
+    
             if not filename.endswith(f".{file_type}"):
                 filename += f".{file_type}"
 
-            # Отримати шлях до папки "Завантаження"
             downloads_path = Path.home() / "Downloads"
             downloads_path.mkdir(parents=True, exist_ok=True)
 
-            # Повний шлях до файлу
+       
             full_path = downloads_path / filename
             self.collected_data["full_filename"] = str(full_path)
 
             self.awaiting_input = "file_confirm"
 
-            # Спроба створити файл
             try:
                 with open(full_path, 'w', encoding='utf-8') as f:
                     pass
                 self.text_signal.emit(f"✅ File '{filename}' created in Downloads.")
                 speak(f"File {filename} created successfully in your Downloads folder.", self)
 
-                # Питаємо, чи редагувати
                 self.awaiting_input = "edit_file"
                 self.text_signal.emit("🤖: Do you want to write something in this file? (yes/no)")
                 speak("Do you want to write something in this file?", self)
@@ -280,9 +276,9 @@ class Jarvis_UI(QWidget):
             import json
             import shutil
 
-            musics = {}  # початкове значення
+            musics = {}  
 
-            # Завантаження існуючого файлу, якщо він є
+     
             if os.path.exists('musics.json') and os.path.getsize('musics.json') > 0:
                 try:
                     with open('musics.json', 'r') as file:
@@ -293,11 +289,10 @@ class Jarvis_UI(QWidget):
             else:
                 print("ℹ️ musics.json не існує або порожній. Створюємо новий.")
 
-            # Перевірка на валідний ввід
             if songname and songlink:
                 musics[songname] = songlink
 
-                # Збереження резервної копії перед перезаписом
+        
                 if os.path.exists('musics.json'):
                     try:
                         shutil.copy('musics.json', 'musics_backup.json')
@@ -305,7 +300,7 @@ class Jarvis_UI(QWidget):
                     except Exception as e:
                         print(f"⚠️ Не вдалося створити бекап: {e}")
 
-                # Запис нового JSON у файл
+            
                 with open('musics.json', 'w') as file:
                     json.dump(musics, file, indent=4)
 
@@ -361,7 +356,7 @@ class Jarvis_UI(QWidget):
             self.input_field.setHidden(True)
 
     def init_file_input(self):
-        # Створюємо кнопку для drag and drop
+   
         self.file_button = QPushButton("📥", self)
         self.file_button.setToolTip("Drag and drop file here or click to load")
         self.file_button.setGeometry(self.width() - 60, self.height() - 100, 50, 50)
@@ -415,14 +410,14 @@ class Jarvis_UI(QWidget):
     def enable_input(self):
         self.input_field.setEnabled(True)
         self.send_button.setEnabled(True)
-        self.input_field.setFocus()  # курсор одразу у полі
+        self.input_field.setFocus() 
 
     def disable_input(self):
         self.input_field.setEnabled(False)
         self.send_button.setEnabled(False)
 
     def resizeEvent(self, event):
-        # При зміні розміру адаптуємо
+    
         self.gif_label.setGeometry(0, 0, self.width(), 400)
         self.overlay.setGeometry(0, 0, self.width(), self.height())
         super().resizeEvent(event)
@@ -436,3 +431,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
