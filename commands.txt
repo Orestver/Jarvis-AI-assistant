@@ -1,0 +1,33 @@
+HERE ARE THE COMMANDS THAT YOU CAN SAY TO JARVIS
+------------------------------------------------
+1.What is the time -- Returning the time
+2.What is the date -- Returning the date and day
+3. volume XX% -- sets the volume on your device.
+4.close + Youtube/Google/Telegram etc. -- closing browser
+5.Youtube/Google/Telegram etc -- Opens browser.
+6.bye/exit/turn off -- turning off JARVIS and set the waiting for wake word status
+7.create file -- Jarvis creating a file for u with the input type.
+8.calculator/notepad/documents -- opens apps
+9.check system -- checking system.
+10. play the music -- playing songs from your personal playlist. (You can add song by saying ADD SONG)
+11. add song -- Adds song to your playlist
+12.shutdown/restart -- turning off PC or restarting PC.
+13. wether (SMTH or Nothing) -- returning the wether in the city that you enter.
+14.route/destination/road -- opens Google maps with destination from your city to city that you enter.
+15.create travel plan +(Country,Num of days, style) -- creates a travel plan for u and saves to pdf file.
+16. roll up -- roling up your browser if its open and using currently.
+17. timer X (seconds,minutes,hours) -- sets the timer.
+18. alarm clock XX (a. m. / p. m.)-- sets the alarm clock.
+19. watch/see/open film (title)-- opens film for u.
+20.i am a (NAME)-- Sets the name in Jarvis`s memory.
+21. who i am -- Returning name that your entered or entered last time.
+22.add meeting at XX (a.m./ p.m.) (topic) -- creates a meeting for u and Jarvis remind you if there is little time left.
+23.show meetings -- showing current meetings.
+24.clear meetings -- clearing all meetings.
+25.close the browser -- closing all browser windows.
+26.wikipedia (THAT say what to search) -- searching in wekepedia.
+27.summarise + file from your PC to summarise -- return a txt file with short summary of that file
+28. AND also you can just say whatever you want and Jarvis will communicate with u
+-----------------------------------------------------
+HOPE THAT WAS USEFUL for u.
+
