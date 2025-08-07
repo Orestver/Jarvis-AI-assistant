@@ -34,7 +34,6 @@ class AssistantMemory:
             del self.memory[key]
             self.save_memory()
 
-    # 🆕 Додаємо метод для зустрічей
     def add_meeting(self, date, time, topic):
         if "meetings" not in self.memory:
             self.memory["meetings"] = []
@@ -51,4 +50,5 @@ class AssistantMemory:
 
     def clear_meetings(self):
         self.memory["meetings"] = []
+
         self.save_memory()
