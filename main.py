@@ -8,8 +8,9 @@ ui_window = Jarvis_UI()
 ui_window.show()
 
 def start_async_loop():
-    asyncio.run(run_voice_assistant(ui_window=ui_window))  # 👈 передаємо jarvis_tab
+    asyncio.run(run_voice_assistant(ui_window=ui_window))
 
 if __name__ == '__main__':
     threading.Thread(target=start_async_loop, daemon=True).start()
     sys.exit(app.exec_())
+
