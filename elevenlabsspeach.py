@@ -7,7 +7,7 @@ from speaker import speak
 
 load_dotenv()
 
-# Ініціалізація ElevenLabs
+
 elevenlabs = ElevenLabs(
     api_key=os.getenv("ELEVENLABS_API_KEY"),
 )
@@ -28,6 +28,7 @@ def speak(txt,ui_window=None):
         os.remove('output.mp3')
     except Exception as e:
         speak(txt,ui_window=None)
+
 
 
 
