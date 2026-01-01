@@ -9,7 +9,7 @@ def create_tts_engine():
         engine.setProperty('voice', voices[1].id)
     return engine
 #function for UI integration
-"""
+
 def speak(text, jarvis_ui):  # <-- обов'язково передаємо екземпляр UI
     def tts_job():
         engine = create_tts_engine()
@@ -23,6 +23,7 @@ def speak(text, jarvis_ui):
     engine = create_tts_engine()
     engine.say(text)
     engine.runAndWait()
-
+"""
 if __name__ == "__main__":
+
     speak('Good afternoon boss!', None)
