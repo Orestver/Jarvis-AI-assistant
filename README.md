@@ -24,7 +24,7 @@ Currently Jarvis vorking only in english language , but i hope Ukrainian version
 
 ## ⌨️Commands
 | Command | Available | Desctiption |
-|:--------|:---------:|------:|
+|:--------|:---------:|:------|
 | Jarvis | ✅ | Set the mode to listening the command so than you can give any command |
 | time | ✅ | Say you the current time and date |
 | volume (__%) | ✅ | Sets the volume on your device to X percent |
