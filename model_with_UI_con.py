@@ -45,8 +45,7 @@ GOOGLE_API_KEY = os.getenv("GOOGLE_API_KEY")
 memory = AssistantMemory()  
 #change if plan is over
 from elevenlabsspeach import speak
-#from elevenlabsspeach import speak
-#from main import speak
+#from speaker import speak
 
 standard_responses_for_questions = [
     "Loading... Sir",
@@ -1270,4 +1269,5 @@ async def run_voice_assistant(ui_window):
 
 if __name__ == "__main__":
     asyncio.run(run_voice_assistant())
+
 
