@@ -45,7 +45,7 @@ Currently Jarvis vorking only in english language , but i hope Ukrainian version
 
 ## 🛠 Installation
 To install open folder in your code editor and paste this commands.
-'''bash
+```bash
 git clone https://github.com/Orestver/Jarvis-AI-assistant
 pip install -r requirements.txt
 py main.py
