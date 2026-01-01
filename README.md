@@ -37,6 +37,7 @@ Currently Jarvis vorking only in english language , but i hope Ukrainian version
 | check system | ✅ | Cheking your computer system |
 | play music | ✅ | Playing music from your musics.json file (You can change this file whatever you want to) |
 | add song | ✅ | adding the song to musics.json (just enter name and url) |
+| watch (name of the film ) | ✅ | Opens the film for you|
 
 
 
